@@ -2,6 +2,7 @@
 
 const crypto = require('crypto')
 const OctoDash = require('octodash')
+const decryptAes256 = require('./lib/decryptAes256')
 
 const CLI_OPTIONS = [{
   names: ['key', 'k'],
@@ -27,16 +28,8 @@ class Command {
     this.readAllFromStdIn((error, input) => {
       if (error) throw error
 
-      console.log(this.decrypt(input).toString('utf8')) // eslint-disable-line no-console
+      console.log(decryptAes256(input, { key: this.key })) // eslint-disable-line no-console
     })
-  }
-
-  decrypt(input) {
-    const cipher = crypto.createDecipher('aes256', this.key)
-
-    let decrypted = cipher.update(input, 'base64', 'utf8')
-    decrypted += cipher.final('utf8')
-    return decrypted
   }
 
   readAllFromStdIn(callback) {

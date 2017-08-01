@@ -2,6 +2,7 @@
 
 const crypto = require('crypto')
 const OctoDash = require('octodash')
+const encryptAes256 = require('./lib/encryptAes256')
 
 const CLI_OPTIONS = [{
   names: ['key', 'k'],
@@ -27,16 +28,8 @@ class Command {
     this.readAllFromStdIn((error, input) => {
       if (error) throw error
 
-      console.log(this.encrypt(input).toString('base64')) // eslint-disable-line no-console
+      console.log(encryptAes256(input, { key: this.key })) // eslint-disable-line no-console
     })
-  }
-
-  encrypt(input) {
-    const cipher = crypto.createCipher('aes256', this.key)
-
-    let encrypted = cipher.update(input, 'utf8', 'base64')
-    encrypted += cipher.final('base64')
-    return encrypted
   }
 
   readAllFromStdIn(callback) {
