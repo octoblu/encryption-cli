@@ -1,0 +1,15 @@
+{
+  "name": "encryption-cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "decrypt-aes256": "node decrypt-aes256.js",
+    "encrypt-aes256": "node encrypt-aes256.js"
+  },
+  "repository": "git@github.com:octoblu/encryption-cli.git",
+  "author": "sqrtofsaturn <sqrtofsaturn@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "octodash": "^1.3.1"
+  }
+}
